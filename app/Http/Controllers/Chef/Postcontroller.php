@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Chef;
 
 use App\Http\Requests\Post\CreatePostRequest;
+use App\Items;
 use App\Notifications\NewOrderAdded;
 use App\placeOrder;
 use App\Post;
@@ -52,8 +53,20 @@ class Postcontroller extends Controller
             'price'=>request('Price'),
             'ended_at'=>request('Ended_At'),
             'user_id'=>Auth::id(),
-            'order_left'=>request('MaxOrder')
+            'order_left'=>request('MaxOrder'),
+            'item_name'=>request('ItemName'),
+            'chef_name'=>Auth::user()->name
         ]);
+        $itemName=Items::where([['item_name','=',request('ItemName')],['menu_for','=',request('MenuFor')]])->get();
+        //dd($itemName);
+        if(sizeof($itemName)==0){
+            Items::create([
+                'item_name'=>request('ItemName'),
+                'menu_for'=>request('MenuFor'),
+            ]);
+        }
+
+
 
 
         return redirect()->action('Chef\ChefController@index');

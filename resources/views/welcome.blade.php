@@ -1,23 +1,30 @@
 @extends('layouts.landingMaster')
 @section('content')
     {{--Home Section--}}
-    <div id="home">
+    <div>
         <div class="row">
-            <div class="panel col-md-offset-6"  >
-                <div class="panel-body">
-                    <img src="{{ asset('img/kabab.jpg') }}" style="height: 400px;width: 100% ">
-                    <h3 class="text-center">Kabab</h3>
-                    <blockquote class="blockquote-reverse">
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and scrambled it to make a type.
-                        </p>
-                        <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
-                    </blockquote>
-                </div>
-            </div>
+            @foreach($posts as $post)
+                <div class="col-md-4">
+                    <div class="panel panel-info" style="margin: 5px">
 
+                        <div class="panel-body">
+
+                            <img src="{{asset('storage/'.$post->image)}}"  style="height:200px;width: 60%; margin-left: 20%">
+                            <h3 class="text-center">Price: {{$post->price}}</h3>
+                            <a href="{{route('post.show',$post->id)}}" class="btn btn-block btn-info" style="font-size: 20px">
+                                Order Now
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            @endforeach
+                <ul class="pagination" style="margin-left: 60%">
+                    {{$posts->links()}}
+                </ul>
         </div>
+
         <div  class="row">
             <div class="col-md-3"></div>
             <div class="panel  col-md-6">
@@ -35,6 +42,24 @@
             </div>
             <div class="col-md-3"></div>
         </div>
+
+        <div class="row">
+            <div class="panel col-md-offset-6"  >
+                <div class="panel-body">
+                    <img src="{{ asset('img/kabab.jpg') }}" style="height: 400px;width: 100% ">
+                    <h3 class="text-center">Kabab</h3>
+                    <blockquote class="blockquote-reverse">
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                            when an unknown printer took a galley of type and scrambled it to make a type.
+                        </p>
+                        <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
+                    </blockquote>
+                </div>
+            </div>
+
+        </div>
+
         <div  class="row">
             <div class="panel col-md-6">
                 <div class="panel-body">

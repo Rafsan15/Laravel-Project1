@@ -30,6 +30,7 @@ class CreatePostRequest extends FormRequest
 //            'max_order'=>'required',
 //            'price'=>'required',
 //            'ended_at'=>'required'
+//            'item_name'=>'required'
 
         ];
     }

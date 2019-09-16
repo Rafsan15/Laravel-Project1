@@ -21,14 +21,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        $posts=Post::latest()->get();
+        $posts=Post::where('order_left','!=',0.00)->latest()->paginate(4);
         foreach ($posts as $post){
             $user=User::find($post->user_id);
             $post->menu_for=$user->name;
         }
 
         //dd($datas);
-        return view('User.home',compact('posts'));    }
+        return view('User.home');    }
 
     /**
      * Show the form for creating a new resource.
@@ -120,14 +120,15 @@ class UserController extends Controller
     public function UserProfile($id)
     {
         $user=User::find($id);
-        $orders=placeOrder::where('user_id',$id)->latest()->get();
+        $orders=placeOrder::where('user_id',$id)->latest()->paginate(6);
+        $orderscount=placeOrder::where('user_id',$id)->get();
         $orderCount=0;
 //        $posts=array();
 //        foreach ($orders as $order) {
 //            $post=Post::where('id',$order->post_id)->get();
 //            array_push($posts,$post);
 //        }
-        foreach ($orders as $order)
+        foreach ($orderscount as $order)
         {
             if($order->deliver==true)
             {
@@ -135,9 +136,14 @@ class UserController extends Controller
             }
         }
         $d=substr( $user->created_at,0,10);
-        return view('User.profile',compact('user','orders','orderCount','d'));
+        return view('User.profile',[
+            'user'=>$user,
+            'orders'=>$orders,
+            'orderCount'=>$orderCount,
+            'd'=>$d
+        ]);
     }
-
+//compact('user','orders','orderCount','d')
     public function notifications()
     {
         \auth()->user()->unreadNotifications->markAsRead();

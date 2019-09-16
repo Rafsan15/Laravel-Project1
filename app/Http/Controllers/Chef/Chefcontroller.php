@@ -27,8 +27,17 @@ class Chefcontroller extends Controller
         $user=User::find(Auth::id());
         $posts=Post::where('user_id',Auth::id())->latest()->get();
         $items=SpecialItem::where('user_id',Auth::id())->latest()->get();
-
-        return view('Chef.profile',compact('user','posts','items'));
+        $orderscount=placeOrder::where('user_id',Auth::id())->get();
+        $orderCount=0;
+        foreach ($orderscount as $order)
+        {
+            if($order->deliver==true)
+            {
+                $orderCount++;
+            }
+        }
+        $d=substr( $user->created_at,0,10);
+        return view('Chef.profile',compact('user','posts','items','orderCount','d'));
     }
 
     /**
@@ -65,8 +74,17 @@ class Chefcontroller extends Controller
         $user=User::find($id);
         $posts=Post::where('user_id',$id)->latest()->get();
         $items=SpecialItem::where('user_id',$id)->latest()->get();
-
-        return view('Chef.profile',compact('user','posts','items'));
+        $orderscount=placeOrder::where('user_id',Auth::id())->get();
+        $orderCount=0;
+        foreach ($orderscount as $order)
+        {
+            if($order->deliver==true)
+            {
+                $orderCount++;
+            }
+        }
+        $d=substr( $user->created_at,0,10);
+        return view('Chef.profile',compact('user','posts','items','orderCount','d'));
     }
 
     /**

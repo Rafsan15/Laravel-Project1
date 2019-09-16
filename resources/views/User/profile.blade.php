@@ -88,6 +88,10 @@
 
                     </tbody>
                 </table>
+                <ul class="pagination" style="margin-left: 60%">
+                    {{$orders->links()}}
+                </ul>
+
 
             </div>
 

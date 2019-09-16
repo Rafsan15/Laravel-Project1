@@ -83,8 +83,8 @@
             <div class="panel panel-info" style="background: #fff3cd;margin-right: 3%">
 {{--                <a href="#" class="btn btn-lg col-md-offset-3" style="background: #1d3b58">Active Menu</a>--}}
                 <hr>
-                <p style="font-size: 20px"><strong >Order Complete: </strong>50</p>
-                <p style="font-size: 20px"><strong >Member Since: </strong>{{$user->created_at}}</p>
+                <p style="font-size: 20px"><strong >Order Complete: </strong>{{$orderCount}}</p>
+                <p style="font-size: 20px"><strong >Member Since: </strong>{{$d}}</p>
                 <br>
             </div>
 

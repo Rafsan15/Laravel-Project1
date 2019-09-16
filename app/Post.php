@@ -9,7 +9,7 @@ class Post extends Model
 {
     protected $fillable = [
     'menu_for', 'details', 'image','max_order','price','ended_at','user_id',
-        'order_left'
+        'order_left','item_name','chef_name'
 ];
     public function chef()
     {

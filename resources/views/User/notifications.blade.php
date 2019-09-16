@@ -29,7 +29,10 @@
                         </li>
                     @endforeach
                 </ul>
-            </div>
+
+                <ul class="pagination" style="margin-left: 60%">
+                    {{$notifications->links()}}
+                </ul>            </div>
         </div>
 
     </div>

@@ -5,6 +5,7 @@
         <div class="col-md-4"></div>
         <div class="panel panel-info col-md-4" style="background: #c9e2b3">
             <h1 class="text-center">Create Post</h1>
+
             @if($errors->any())
                 <div class="alert alert-danger">
                     <ul class="list-group">
@@ -16,9 +17,12 @@
                     </ul>
                 </div>
             @endif
+
             <form class="form-horizontal" action="{{route('post.store')}}" method="Post" enctype="multipart/form-data" style="color: black">
                 <fieldset>
+
                     {{csrf_field()}}
+
                     <div class="form-group">
                         <div class="col-md-1"></div>
                         <div class="col-md-4">
@@ -38,6 +42,23 @@
 
                     <div class="form-group">
                         <div class="col-md-1"></div>
+                        <div class="col-md-4">
+                            <label for="itemName" class="control-label" style="font-size: 15px">Item Name</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" name="ItemName" id="itemName" list="items" />
+                            <datalist id="items">
+                                <option>Volvo</option>
+                                <option>Saab</option>
+                                <option>Mercedes</option>
+                                <option>Audi</option>
+                            </datalist>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-1"></div>
                         <div class="col-md-10">
                             <textarea class="form-control" name="Details" rows="5" id="textArea" placeholder="Type Some Details Here"></textarea>
 {{--                            <input id="details" type="hidden" name="Details">--}}
@@ -47,6 +68,7 @@
                         </div>
                         <div class="col-md-1"></div>
                     </div>
+
                     <div class="form-group">
                         <div class="col-md-3"></div>
                         <div class="col-lg-8">
@@ -54,7 +76,6 @@
                         </div>
                         <div class="col-md-1"></div>
                     </div>
-
 
                     <div class="form-group">
                         <div class="col-md-1"></div>
@@ -83,7 +104,6 @@
                         <div class="col-md-1"></div>
                     </div>
 
-
                     <div class="form-group">
                         <div class="col-md-1"></div>
                         <div class="col-md-4">
@@ -94,6 +114,7 @@
                         </div>
                         <div class="col-md-1"></div>
                     </div>
+
                     <div class="form-group">
                         <div class="col-md-1"></div>
                         <div class="col-md-4">

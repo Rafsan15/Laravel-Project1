@@ -21,11 +21,14 @@ class CreatePlaceOrdersTable extends Migration
                 ->onDelete('cascade');
             $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')
-                ->references('id')->on('posts');
+                ->references('id')->on('posts')
+                ->onDelete('cascade');
             $table->float('quantity');
             $table->float('price');
             $table->string('address');
             $table->string('phone');
+            $table->boolean('confirm');
+            $table->boolean('deliver');
             $table->timestamps();
         });
     }

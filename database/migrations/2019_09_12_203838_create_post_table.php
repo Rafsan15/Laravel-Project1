@@ -13,17 +13,19 @@ class CreatePostTable extends Migration
      */
     public function up()
     {
-        Schema::create('post', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
             $table->string('menu_for');
+            $table->string('item_name');
             $table->string('image');
             $table->text('details');
             $table->float('max_order');
             $table->float('price');
+            $table->float('order_left');
             $table->dateTimeTz('ended_at')->nullable();
             $table->timestamps();
         });
@@ -36,6 +38,6 @@ class CreatePostTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post');
+        Schema::dropIfExists('posts');
     }
 }
