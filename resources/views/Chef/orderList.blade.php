@@ -9,6 +9,7 @@
                 <th class="text-center">Address</th>
                 <th class="text-center">Confirm</th>
                 <th class="text-center">Deliver</th>
+                <th class="text-center">Cancel</th>
             </tr>
             </thead>
             <tbody>
@@ -31,6 +32,17 @@
                         @else
                             <a href="" class="btn btn-success disabled">Done</a>
                         @endif
+                    </td>
+
+                    <td>
+                        @if($user->confirm=='false')
+                            <form action="{{route('order.delete',['id'=>$user->id,"order"=>$user->id])}}" method="GET">
+                                {{csrf_field()}}
+                                <input type="submit" value="Cancel" class="btn btn-danger">
+
+                            </form>
+                            @endif
+
                     </td>
 
                 </tr>

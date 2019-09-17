@@ -136,7 +136,9 @@ class Postcontroller extends Controller
             'price'=>request('Price'),
             'ended_at'=>request('Ended_At'),
             'user_id'=>Auth::id(),
-            'order_left'=>$prevOrderLeft
+            'order_left'=>$prevOrderLeft,
+            'item_name'=>request('ItemName'),
+            'chef_name'=>Auth::user()->name
 
         ]);
         return redirect()->action('Chef\ChefController@index');

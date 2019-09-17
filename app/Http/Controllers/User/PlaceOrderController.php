@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Requests\Post\CreatePostRequest;
+use App\Notifications\CancelOrderAdded;
 use App\Notifications\ConfirmOrderAdded;
 use App\Notifications\DeliverOrderAdded;
 use App\Notifications\NewOrderAdded;
@@ -12,6 +13,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PlaceOrderController extends Controller
 {
@@ -142,8 +144,29 @@ class PlaceOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id ,placeOrder $order)
     {
-        //
+        $orders=placeOrder::find($id);
+
+        $deletedRows = placeOrder::where('id', $id)->delete();
+        $order->customer->notify(new CancelOrderAdded($order));
+
+        $post=Post::find($orders->post_id);
+        $left=$post->order_left+$orders->quantity;
+        $post->update([
+            'menu_for'=>$post->menu_for,
+            'image'=>$post->image,
+            'details'=>$post->details,
+            'max_order'=>$post->max_order,
+            'price'=>$post->price,
+            'ended_at'=>$post->ended_at,
+            'user_id'=>$post->user_id,
+            'order_left'=>$left,
+            'item_name'=>$post->item_name,
+            'chef_name'=>Auth::user()->name
+
+        ]);
+
+        return redirect()->action('User\PlaceOrderController@index',$order->post_id);
     }
 }

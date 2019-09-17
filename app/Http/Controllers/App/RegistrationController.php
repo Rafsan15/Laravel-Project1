@@ -40,6 +40,7 @@ class RegistrationController extends Controller
     public function UserProfilePicture()
     {
         $image=request('Image')->store('users');
+      //  dd($image);
         $user=User::find(Auth::id());
         $user->update([
             'name'=>$user->name,

@@ -10,6 +10,7 @@ use App\SpecialItem;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -21,13 +22,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $posts=Post::where('order_left','!=',0.00)->latest()->paginate(4);
-        foreach ($posts as $post){
-            $user=User::find($post->user_id);
-            $post->menu_for=$user->name;
-        }
 
-        //dd($datas);
+
         return view('User.home');    }
 
     /**

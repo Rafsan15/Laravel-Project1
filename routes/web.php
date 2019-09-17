@@ -24,6 +24,7 @@
      Route::get('placeOrder/{id}','User\UserController@PlaceOrderForm')->name('user.placeOrderForm');
      Route::get('orderList/{id}','User\PlaceOrderController@index')->name('order.orderList');
      Route::get('orderStatus/{id}/{flag}/{order}','User\PlaceOrderController@update')->name('order.status');
+     Route::get('orderDelete/{id}/{order}','User\PlaceOrderController@destroy')->name('order.delete');
      Route::get('specialItem','Chef\ChefController@SpecialItemForm')->name('chef.specialItemForm');
      Route::post('specialItem','Chef\ChefController@SpecialItemData')->name('chef.specialItemData');
      Route::get('displaySpecialItem/{id}','Chef\ChefController@DisplaySpecialItem')->name('chef.displaySpecialItem');

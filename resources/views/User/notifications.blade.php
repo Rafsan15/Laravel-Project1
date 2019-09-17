@@ -25,6 +25,12 @@
                                 <a href="{{route('post.show',$notification->data['order']['post_id'])}}"
                                    class="btn btn-primary btn-sm col-md-offset-4">
                                     View</a>
+
+                            @elseif($notification->type=="App\Notifications\CancelOrderAdded")
+                               <span style="color: red">Your order has been canceled!!!</span>
+                                <a href="{{route('post.show',$notification->data['order']['post_id'])}}"
+                                   class="btn btn-primary btn-sm col-md-offset-4">
+                                    View</a>
                             @endif
                         </li>
                     @endforeach
